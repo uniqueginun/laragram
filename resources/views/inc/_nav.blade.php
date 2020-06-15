@@ -11,7 +11,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </ul>
 
@@ -38,15 +38,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">
+                        <a class="nav-link" href="/">
                             <i class="fas fa-home fa-2x"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <i class="fab fa-instagram fa-2x"></i>
-                        </a>
-                    </li>
+                    <create-post-modal />
                     <li style="display: none" class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->username }} <span class="caret"></span>

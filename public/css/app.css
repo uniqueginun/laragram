@@ -10938,3 +10938,7 @@ a.text-dark:focus {
   font-size: 22px;
 }
 
+.form-control-sm {
+  border: 1px solid #ced4da;
+}
+

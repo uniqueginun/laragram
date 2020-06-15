@@ -8,18 +8,35 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import Vuex from 'vuex'
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.use(Vuex)
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import posts from './store/posts'
+
+const store = new Vuex.Store({
+    modules: {
+        posts
+    }
+})
+
+import VModal from 'vue-js-modal'
+
+Vue.use(VModal, {
+    dynamic: true,
+    injectModalsContainer: true,
+    dynamicDefaults: {
+        height: 'auto',
+        pivotY: 0.2,
+        classes: 'p-4',
+    }
+})
+
+
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+// Vue.component('example-component', require('./components/CreatePostModal.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +46,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    store
 });

@@ -7,11 +7,15 @@
 </template>
 
 <script>
+    import CreatePostForm from "./CreatePostForm";
+
     export default {
 
         methods: {
             lunchModal() {
-                console.log('modal lunched...');
+                this.$modal.show(CreatePostForm, {}, {
+                    draggable: true
+                })
             }
         }
 

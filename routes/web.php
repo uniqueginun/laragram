@@ -22,3 +22,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/{user}', 'ProfileController@show')->name('profile.show');
+
+Route::get('media/types', 'MediaController@types');
+
