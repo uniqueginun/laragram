@@ -44,4 +44,14 @@ class User extends Authenticatable
     {
         return 'username';
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
