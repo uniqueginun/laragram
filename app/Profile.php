@@ -12,4 +12,13 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getAvatar()
+    {
+        if (!$this->avatar) {
+            return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->user->email ) ) ) . "?d=mp";
+        }
+
+        return "/storage/" . $this->avatar;
+    }
 }

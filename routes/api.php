@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:sanctum'], function () {
     Route::post('posts', 'Post\PostController@store');
+    Route::get('users/{user}', 'User\UserController@show');
 });
 
 

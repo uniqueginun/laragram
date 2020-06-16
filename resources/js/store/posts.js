@@ -3,11 +3,15 @@ export default {
     namespaced: true,
 
     state: {
-        posts: []
+        posts: [],
+        followers: [],
+        following: []
     },
 
     getters: {
-
+        posts: state => state.posts,
+        followers: state => state.followers,
+        following: state => state.following
     },
 
     mutations: {
@@ -26,6 +30,11 @@ export default {
             commit('PUSH_POSTS', data.post)
 
             return data;
+        },
+
+        async fetchUserData ({commit}, user) {
+            const { data } = await axios.get(`/api/users/${user.username}`)
+            console.log(data)
         }
     }
 
