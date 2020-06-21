@@ -15,8 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('posts/{post}', 'Post\PostController@show');
+    Route::get('user/{user}/posts', 'User\UserController@getPosts');
     Route::post('posts', 'Post\PostController@store');
     Route::get('users/{user}', 'User\UserController@show');
+    Route::post('profile/{profile}/follow', 'Profile\ProfileController@following');
+    Route::post('profile/update', 'Profile\ProfileController@update');
+    Route::get('timeline', 'Timeline\TimelineController@index');
+    Route::post('/likes/{post}/like', 'Like\PostLikeController@toggleLike');
+    Route::post('/comments/{post}/add', 'Reply\PostReplyController@store');
+    Route::get('/suggestions', 'Timeline\SuggestionsController@index');
 });
 
 

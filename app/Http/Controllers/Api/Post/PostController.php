@@ -4,12 +4,23 @@ namespace App\Http\Controllers\Api\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PostStoreRequest;
+use App\Http\Resources\Post\PostCollection;
+use App\Http\Resources\Post\PostResource;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
+
+    public function show(Post $post)
+    {
+        $post->load(['images', 'user']);
+
+        return new PostResource($post);
+    }
+
     public function store(PostStoreRequest $request)
     {
 
@@ -28,7 +39,7 @@ class PostController extends Controller
             $post->load('images');
 
             return response()->json([
-                'post' => $post
+                'post' => new PostResource($post)
             ], 201);
 
         } catch (\Exception $exception) {

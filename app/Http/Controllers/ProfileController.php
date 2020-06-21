@@ -15,6 +15,13 @@ class ProfileController extends Controller
 
         $userData = new UserResource($user);
 
-        return view('profile.show', compact('userData'));
+        $followedByMe = $user->profile->followers()->where('user_id', auth()->id())->exists();
+
+        return view('profile.show', compact('userData', 'followedByMe'));
+    }
+
+    public function edit(Request $request)
+    {
+        return view('profile.edit');
     }
 }

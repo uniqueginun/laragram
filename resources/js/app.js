@@ -8,30 +8,44 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import Vuex from 'vuex'
+Vue.prototype.$user = User;
 
+import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import posts from './store/posts'
+import profile from './store/profile'
+import timeline from './store/timeline'
 
 const store = new Vuex.Store({
     modules: {
-        posts
+        posts,
+        profile,
+        timeline
     }
 })
 
 import VModal from 'vue-js-modal'
-
 Vue.use(VModal, {
     dynamic: true,
     injectModalsContainer: true,
     dynamicDefaults: {
         height: 'auto',
         pivotY: 0.2,
-        classes: 'p-4',
+        classes: 'p-0',
     }
 })
 
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
+
+import Toasted from 'vue-toasted';
+Vue.use(Toasted, {
+    type: 'success'
+})
+
+import VueObserveVisibility from 'vue-observe-visibility'
+Vue.use(VueObserveVisibility)
 
 const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))

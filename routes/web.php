@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TimelineController@index');
 
 Auth::routes();
 
@@ -25,3 +23,4 @@ Route::get('/{user}', 'ProfileController@show')->name('profile.show');
 
 Route::get('media/types', 'MediaController@types');
 
+Route::get('/profiles/edit', 'ProfileController@edit')->middleware('auth');

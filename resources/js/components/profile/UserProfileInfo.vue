@@ -7,18 +7,19 @@
             <div class="ml-lg-5 pl-lg-5 w-50 d-flex flex-column justify-content-md-around h-100">
                 <div class=" d-flex justify-content-between align-items-center mb-3">
                     <h2 class="username">{{ user.username }}</h2>
-                    <button class="btn btn-sm btn-primary">Follow</button>
+                    <profile-following v-if="showFollowingButton" :followedByMe="followedByMe" :user="user" />
+                    <a v-if="$user.id == user.id" href="/profiles/edit" class="btn btn-sm btn-secondary">Edit Profile</a>
                 </div>
                 <div>
                     <ul>
                         <li>
-                            <span class="font-weight-bold">14,362</span> posts
+                            <span class="font-weight-bold">{{ postsCount }}</span> posts
                         </li>
                         <li>
-                            <span class="font-weight-bold">6.6m</span> followers
+                            <span class="font-weight-bold">{{ followersCount }}</span> followers
                         </li>
                         <li>
-                            <span class="font-weight-bold">17</span> following
+                            <span class="font-weight-bold">{{ followingCount }}</span> following
                         </li>
                     </ul>
                 </div>
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+
     export default {
         name: "UserProfileInfo",
 
@@ -39,6 +41,39 @@
             user: {
                 type: Object,
                 required: true
+            },
+            followers: {
+                type: Array,
+                required: true
+            },
+            following: {
+                type: Array,
+                required: true
+            },
+            posts: {
+                type: Array,
+                required: true
+            },
+            followedByMe: {
+                required: false
+            }
+        },
+
+        computed: {
+            postsCount() {
+                return this.posts.length;
+            },
+
+            followersCount() {
+                return this.followers.length;
+            },
+
+            followingCount() {
+                return this.following.length;
+            },
+
+            showFollowingButton() {
+                return this.$user.id != this.user.id
             }
         },
     }

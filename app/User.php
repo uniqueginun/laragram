@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -50,8 +51,38 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function getAvatar()
+    {
+        if (!$this->profile->avatar) {
+            return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "?d=mp";
+        }
+
+        return "/storage/" . $this->profile->avatar;
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
+
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
+    public function hasLiked($postId)
+    {
+        return $this->likes()->where('post_id', $postId)->exists();
+    }
+
 }

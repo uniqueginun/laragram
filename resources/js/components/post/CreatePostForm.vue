@@ -14,8 +14,9 @@
         <div class="form-group">
             <input type="text" v-model="post.caption" placeholder="Post Caption" class="form-control" />
         </div>
-        <div class="form-group">
-             <button type="submit" class="btn btn-secondary btn-block">Upload Post</button>
+        <div class="form-group d-flex justify-content-center">
+             <img v-if="loading" class="align-items-md-center" src="/loading.gif" />
+             <button type="submit" v-else class="btn btn-secondary btn-block">Upload Post</button>
         </div>
     </form>
 </template>
@@ -25,6 +26,7 @@
 
         data: () => {
             return {
+                loading: false,
                 post: {
                     images: [],
                     caption: 'post caption'
@@ -62,17 +64,20 @@
                     return;
                 }
 
+                this.loading = true
 
                 let form = new FormData();
+
+                form.append('caption', this.post.caption)
 
                 this.media.forEach((img, index) => {
                     form.append(`media[${index}]`, img);
                 })
 
                 this.$store.dispatch('posts/createPost', form).then(res => {
-                    console.log(res)
-                }).then(() => {
                     this.clean()
+                }).catch((e) => {
+                    console.log(e)
                 })
 
             },
@@ -83,6 +88,7 @@
                 this.post.caption = ''
                 this.errors.caption = []
                 this.errors.images = []
+                this.loading = false
                 this.$emit('close')
             }
         },

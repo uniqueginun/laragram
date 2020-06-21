@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        <user-profile :user="{{ json_encode($userData) }}" />
+        <user-profile :followed-by-me="{{ $followedByMe ? 1 : 0 }}" :user="{{ json_encode($userData) }}" />
     </div>
 @endsection

@@ -21,4 +21,9 @@ class Profile extends Model
 
         return "/storage/" . $this->avatar;
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
