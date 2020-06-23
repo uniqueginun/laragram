@@ -35,7 +35,11 @@
             },
             ...mapGetters({
                 posts: 'timeline/posts'
-            })
+            }),
+
+            channelName() {
+                return 'timeline.' + this.$user.id;
+            }
         },
 
         methods: {
@@ -52,7 +56,19 @@
                 if(isVisible) {
                     this.fetchPosts()
                 }
+            },
+            listenForTimelineChannelEvents() {
+                Echo.private(this.channelName)
+                    .listen('.post.created', e => {
+
+                        this.$store.commit('timeline/PUSH_POSTS', [e])
+                        this.$toasted.success(`${e.user.name} created new post`)
+                    });
             }
+        },
+
+        mounted() {
+            this.listenForTimelineChannelEvents();
         }
     }
 </script>

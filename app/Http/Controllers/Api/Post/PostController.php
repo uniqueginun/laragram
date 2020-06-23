@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Post;
 
+use App\Events\Post\PostCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PostStoreRequest;
 use App\Http\Resources\Post\PostCollection;
@@ -37,6 +38,8 @@ class PostController extends Controller
             DB::commit();
 
             $post->load('images');
+
+            broadcast(new PostCreated($post));
 
             return response()->json([
                 'post' => new PostResource($post)

@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "laravel-echo": "^1.8.0",
+        "pusher-js": "^4.3.1",
         "vue-carousel": "^0.18.0",
         "vue-js-modal": "^2.0.0-rc.3",
         "vue-observe-visibility": "^0.4.6",

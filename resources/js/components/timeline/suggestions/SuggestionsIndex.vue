@@ -5,11 +5,12 @@
             <a href="/explorer/people">See all</a>
         </div>
         <div class="mt-3 d-flex flex-column align-items-center justify-content-between">
-            <user-card class="py-2 w-100" v-for="user in suggestions" :user="user" :key="user.id">
+            <user-card v-if="suggestions.length" class="py-2 w-100" v-for="user in suggestions" :user="user" :key="user.id">
                 <a href="#" @click.prevent="follow(user)" class="btn btn-link text-decoration-none text-primary">
                     Follow
                 </a>
             </user-card>
+            <p v-else >No users to suggest</p>
         </div>
     </div>
 </template>

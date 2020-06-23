@@ -1,5 +1,7 @@
 <template>
-    <p>replies go here</p>
+    <div class="py-3 mb-auto">
+        <timeline-post-replies :post="post" />
+    </div>
 </template>
 
 <script>

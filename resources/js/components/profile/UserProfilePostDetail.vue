@@ -22,9 +22,8 @@
                             <post-actions :post="post" />
                         </div>
                     </div>
-                    <div>
-                        <input class="form-control" placeholder="write aa comment..." type="text" />
-                    </div>
+
+                    <timeline-post-compose-reply ref="commentField" :post="postForReply" />
                 </div>
             </div>
         </slide>
@@ -61,6 +60,15 @@
         mounted() {
             this.images.push(this.post)
             this.fetchPostDetails()
+        },
+
+        computed: {
+            postForReply() {
+                return {
+                    id: this.post.post_id,
+                    path: this.post.path
+                }
+            }
         }
 
     }

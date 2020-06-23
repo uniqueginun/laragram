@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pb-2">
         <user-card :user="reply.user">
             <div class="d-flex flex-column">
                 {{ reply.body }}

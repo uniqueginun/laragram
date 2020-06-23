@@ -1,6 +1,7 @@
 <template>
     <div>
-        <input type="text" v-model="reply" @keyup="handleKeyDown" class="form-control" placeholder="Add a comment..." />
+        <input type="text" v-model="reply" @keyup="handleKeyDown"
+               class="form-control" placeholder="Add a comment here..." />
     </div>
 </template>
 
